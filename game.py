@@ -10,9 +10,11 @@ def main():
     print("༼ ᓄºل͟º ༽ᓄ   ᕦ(ò_óˇ)ᕤ")
     print("The gates are opening...")
 
-    goblin = Goblin("Steve")
+    goblin1 = Goblin("Steve")
+    goblin2 = Goblin("Scrabble")
 
-    print(f"{goblin.name} enters the arena with {goblin.health} health.")
+    print(f"{goblin1.name} enters the arena with {goblin1.health} health.")
+    print(f"{goblin2.name} enters the arena with {goblin2.health} health.")
     print("But no hero has answered the call... yet.")
 
 
