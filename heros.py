@@ -6,9 +6,10 @@ class Warrior:
     def __init__(self, name):
         self.name = name
         self.health = int(random.randint(100,150))
-        self.magic_attack_power = 0
-        self.attack_power = 20
+        self.attack_power = 25
+        self.magic_affinity = 0
         self.armor = 10
+        self.mp = 0
         self.canAOE = True
 
     def attack(self):
@@ -23,14 +24,15 @@ class Warrior:
         """Return True while the goblin has health remaining."""
         return self.health > 0
 
-class Lightning_Mage:
+class Mage:
 
     def __init__(self, name):
         self.name = name
         self.health = int(random.randint(100,120))
         self.attack_power = 5
-        self.magic_attack_power = 20
+        self.magic_affinity = 1.5
         self.armor = 10
+        self.mp = 100
         self.canAOE = True
     
     def attack(self):
@@ -44,3 +46,4 @@ class Lightning_Mage:
     def is_alive(self):
         """Return True while the goblin has health remaining."""
         return self.health > 0
+

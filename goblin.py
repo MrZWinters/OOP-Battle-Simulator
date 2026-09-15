@@ -8,7 +8,7 @@ class Goblin:
         self.name = name
         self.health = 100
         self.attack_power = 15
-        self.magic_attack_power = 0
+        self.magic_affinity = 0
         self.armor = 0
         self.canAOE = False
 
