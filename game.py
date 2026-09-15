@@ -1,5 +1,6 @@
 from goblin import Goblin
-from hero import Hero
+from heros import Warrior
+from Attacks import attack, AOE_attack
 
 ARENA_NAME = "Super cool ARENA"
 
@@ -12,14 +13,14 @@ def main():
 
     goblin1 = Goblin("Steve")
     goblin2 = Goblin("Scrabble")
-    hero = Hero("Mr67Man")
+    hero = Warrior("Mr67Man")
 
     print(f"{goblin1.name} enters the arena with {goblin1.health} health.")
     print(f"{goblin2.name} enters the arena with {goblin2.health} health.")
     print(f"{hero.name} enters the arena with {hero.health} health.")
 
-    hero_attack = hero.attack()
-    goblin1.take_damage(hero_attack)
+    attack(goblin1, hero)
+    AOE_attack([goblin1, goblin2], hero)
 
 
 if __name__ == "__main__":

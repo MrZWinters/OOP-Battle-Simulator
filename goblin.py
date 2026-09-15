@@ -8,6 +8,9 @@ class Goblin:
         self.name = name
         self.health = 100
         self.attack_power = 15
+        self.magic_attack_power = 0
+        self.armor = 0
+        self.canAOE = False
 
     def attack(self):
         """Return a random amount of damage."""
