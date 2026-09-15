@@ -10,6 +10,7 @@ class Goblin:
         self.attack_power = 15
         self.magic_affinity = 0
         self.armor = 0
+        self.mp = 0
         self.canAOE = False
 
     def attack(self):
@@ -19,8 +20,11 @@ class Goblin:
     def take_damage(self, damage):
         """Reduce health without allowing it to fall below zero."""
         self.health = max(0, self.health - damage)
-        print(f"{self.name} takes {damage} damage. Health: {self.health}")
+        print(f"{self.name} takes {int(damage)} damage. Health: {int(self.health)}")
 
-    def is_alive(self):
-        """Return True while the goblin has health remaining."""
-        return self.health > 0
+    def is_dead(self):
+        """Return True if dead."""
+        if self.health == 0:
+            return True
+        else:
+            return False

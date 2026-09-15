@@ -1,8 +1,22 @@
 from goblin import Goblin
 from heros import Warrior, Mage
-from Attacks import attack, AOE_attack, ballLightning
+from Attacks import attack, aoe_attack, lightning_orb, chain_lightning
 
 ARENA_NAME = "Super cool ARENA"
+
+def battle(hero: Warrior, enemy: Goblin):
+    while hero.is_alive() and enemy.is_alive:
+        attack(enemy, hero)
+
+        if enemy.is_alive():
+            attack(hero,enemy)
+    
+    if hero.is_alive():
+        print(f"{hero.name} wins")
+    else:
+        print(f"{enemy.name} wins")
+
+
 
 
 def main():
@@ -26,9 +40,12 @@ def main():
     print(f"{hero.name} enters the arena with {hero.health} health.")
 
     attack(goblin1, hero)
-    AOE_attack(group1, hero)
+    aoe_attack(group1, hero)
 
-    ballLightning(goblin3, wiz)
+    lightning_orb(goblin3, wiz)
+    print(wiz.mp)
+    chain_lightning(group2,wiz)
+    print(wiz.mp)
 
 
     
