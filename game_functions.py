@@ -39,6 +39,7 @@ def hero_attack_chose(hero: Hero, alive_enemys: list, chose):
             if len(alive_enemys) >= 1:
                 print("targest:")
                 for enemys in alive_enemys:
+<<<<<<< Updated upstream
                     print(f"{enemys+1}: {alive_enemys(enemys).name}")
                 target = (input("select enemy(number): "))
                 attack(alive_enemys(target-1), hero)
@@ -48,6 +49,13 @@ def hero_attack_chose(hero: Hero, alive_enemys: list, chose):
         elif attack_chose.lower == "a" or attack_chose.lower == "AOE slash":
             aoe_attack(alive_enemys, hero)
     elif 
+=======
+                    print(f"{enemy+1}: {alive_enemys(enemys).name}")
+                target = (input("select enemy(number): "))
+                
+            
+        elif attack_chose.lower == "a" or attack_chose.lower == "AOE slash":
+>>>>>>> Stashed changes
 
 
         

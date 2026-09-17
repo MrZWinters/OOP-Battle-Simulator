@@ -14,15 +14,16 @@ def aoe_attack(target_list, attacker):
         print(f"{attacker.name} took 1 damage and is now at {attacker.health}")
 
 
-
 def lightning_orb(target, attacker):
     if attacker.magic_affinity == 0:
         print(f"{attacker.name} has no magic affinity")
     elif attacker.mp == 0:
         print(f"{attacker.name} has no mp left")
     else:
-        print(f"{attacker.name} cast ballLightning at {target.name}")
+        print(f"{attacker.name} casts ballLightning at {target.name}")
         target.take_damage(max(0,int(20 * attacker.magic_affinity)))
+        target.statis_effect = "stun"
+        print(f"{target.name} was stuned")
         attacker.mp -= 10
 
 def chain_lightning(target_list, attacker):
@@ -32,9 +33,38 @@ def chain_lightning(target_list, attacker):
         print(f"{attacker.name} has no mp left")
     elif attacker.canAOE == True:
         for attacked in target_list:
-            print(f"{attacker.name} cast chainlightning and hits {attacked.name}")
+            print(f"{attacker.name} casts chainlightning and hits {attacked.name}")
             attacked.take_damage(max(0,int(20 * attacker.magic_affinity)))
+            attacked.statis_effect = "stun"
+            print(f"{attacked.name} was stuned")
             attacker.mp -= 20
     else:
         print(f"{attacker.name} cant use that spell")
 
+
+def fireball(target, attacker):
+    if attacker.magic_affinity == 0:
+        print(f"{attacker.name} has no magic affinity")
+    elif attacker.mp == 0:
+        print(f"{attacker.name} has no mp left")
+    else:
+        print(f"{attacker.name} casts fireball at {target.name}")
+        target.take_damage(max(0,int(20 * attacker.magic_affinity)))
+        target.statis_effect = "burn"
+        print(f"{target.name} was burned")
+        attacker.mp -= 10
+
+def firewall(target_list, attacker):
+    if attacker.magic_affinity == 0:
+        print(f"{attacker.name} has no magic affinity")
+    elif attacker.mp == 0:
+        print(f"{attacker.name} has no mp left")
+    elif attacker.canAOE == True:
+        for attacked in target_list:
+            print(f"{attacker.name} casts chainlightning and hits {attacked.name}")
+            attacked.take_damage(max(0,int(20 * attacker.magic_affinity)))
+            attacked.statis_effect = "burn"
+            print(f"{attacked.name} was burned")
+            attacker.mp -= 20
+    else:
+        print(f"{attacker.name} cant use that spell")

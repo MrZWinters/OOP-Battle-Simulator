@@ -1,51 +1,52 @@
-from goblin import Goblin
-from heros import Warrior, Mage
-from Attacks import attack, aoe_attack, lightning_orb, chain_lightning
+from enemys import Goblin
+from heros import Hero
+from Attacks import attack, aoe_attack, lightning_orb, chain_lightning, fireball, firewall
+from game_functions import stats, enemy_spawner
+import time
 
 ARENA_NAME = "Super cool ARENA"
-
-def battle(hero: Warrior, enemy: Goblin):
-    while hero.is_alive() and enemy.is_alive:
-        attack(enemy, hero)
-
-        if enemy.is_alive():
-            attack(hero,enemy)
-    
-    if hero.is_alive():
-        print(f"{hero.name} wins")
-    else:
-        print(f"{enemy.name} wins")
-
-
-
 
 def main():
     """Open the arena and introduce its first opponent."""
     print(f"Welcome to {ARENA_NAME}!")
-    print("༼ ᓄºل͟º ༽ᓄ   ᕦ(ò_óˇ)ᕤ")
-    print("The gates are opening...")
+    round = 1
+    alive_enemys = []
+    dead_enemys = []
 
-    goblin1 = Goblin("Steve")
-    goblin2 = Goblin("Scrabble")
-    goblin3 = Goblin("mark")
-    goblin4 = Goblin("sam")
-    hero = Warrior("Mr67Man")
-    wiz = Mage("MrMage")
+    print("----------------------------------------------------------------------------")
+    hero = Hero(input(f"make character Name: "))
+    print("classes: Warrior, Mage")
+    clas = str(input("select character class:"))
+    if clas.lower() == "warrior":
+        hero.max_health
+        hero.health = 150
+        hero.max_mp = 0
+        hero.attack_power = 15
+        hero.armor = 15
+        hero.weapon = "sword"
+    elif clas.lower() == "mage":
+        hero.max_health = 120
+        hero.health = 120
+        hero.max_mp = 100
+        hero.mp = 100
+        hero.magic_affinity = 1.5
+        hero.armor = 6
+        hero.weapon = "staff"
+    else:
+        print("not a class")
+    print("----------------------------------------------------------------------------")
+    stats(hero)   
+    print("----------------------------------------------------------------------------")
+    enemy_spawner(round, alive_enemys)
+    while alive_enemys != []:
+        turn_chose = str(input("attack(a)  items(i)"))
+        if turn_chose.lower == "a" or turn_chose.lower == "attack":
+            if hero.weapon == "staff":
 
-    group1 = [goblin1, goblin2]
-    group2 = [goblin3, goblin4]
+        elif turn_chose.lower == "i" or turn_chose.lower == "items":
+        
 
-    print(f"{goblin1.name} enters the arena with {goblin1.health} health.")
-    print(f"{goblin2.name} enters the arena with {goblin2.health} health.")
-    print(f"{hero.name} enters the arena with {hero.health} health.")
 
-    attack(goblin1, hero)
-    aoe_attack(group1, hero)
-
-    lightning_orb(goblin3, wiz)
-    print(wiz.mp)
-    chain_lightning(group2,wiz)
-    print(wiz.mp)
 
 
     
