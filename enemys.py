@@ -25,7 +25,7 @@ class Goblin:
 
     def is_dead(self):
         """Return True if dead."""
-        if self.health == 0:
+        if self.health <= 0:
             return True
         else:
             return False
@@ -54,7 +54,7 @@ class Boss:
 
     def is_dead(self):
         """Return True if dead."""
-        if self.health == 0:
+        if self.health <= 0:
             return True
         else:
             return False
@@ -83,7 +83,7 @@ class Skeleton:
 
     def is_dead(self):
         """Return True if dead."""
+        dead = False
         if self.health == 0:
-            return True
-        else:
-            return False
+            dead = True
+        return dead

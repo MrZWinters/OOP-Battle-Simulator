@@ -17,19 +17,20 @@ def aoe_attack(target_list, attacker):
 def lightning_orb(target, attacker):
     if attacker.magic_affinity == 0:
         print(f"{attacker.name} has no magic affinity")
-    elif attacker.mp == 0:
+    elif attacker.mp >= 20:
         print(f"{attacker.name} has no mp left")
     else:
         print(f"{attacker.name} casts ballLightning at {target.name}")
         target.take_damage(max(0,int(20 * attacker.magic_affinity)))
         target.statis_effect = "stun"
         print(f"{target.name} was stuned")
-        attacker.mp -= 10
+    attacker.mp -= 20
+    print(f"mp left:{attacker.mp}")
 
 def chain_lightning(target_list, attacker):
     if attacker.magic_affinity == 0:
         print(f"{attacker.name} has no magic affinity")
-    elif attacker.mp == 0:
+    elif attacker.mp >= 20:
         print(f"{attacker.name} has no mp left")
     elif attacker.canAOE == True:
         for attacked in target_list:
@@ -37,34 +38,37 @@ def chain_lightning(target_list, attacker):
             attacked.take_damage(max(0,int(20 * attacker.magic_affinity)))
             attacked.statis_effect = "stun"
             print(f"{attacked.name} was stuned")
-            attacker.mp -= 20
     else:
         print(f"{attacker.name} cant use that spell")
+    attacker.mp -= 20
+    print(f"mp left:{attacker.mp}")
 
 
 def fireball(target, attacker):
     if attacker.magic_affinity == 0:
         print(f"{attacker.name} has no magic affinity")
-    elif attacker.mp == 0:
+    elif attacker.mp >= 20:
         print(f"{attacker.name} has no mp left")
     else:
         print(f"{attacker.name} casts fireball at {target.name}")
         target.take_damage(max(0,int(20 * attacker.magic_affinity)))
         target.statis_effect = "burn"
         print(f"{target.name} was burned")
-        attacker.mp -= 10
+    attacker.mp -= 20
+    print(f"mp left:{attacker.mp}")
 
 def firewall(target_list, attacker):
     if attacker.magic_affinity == 0:
         print(f"{attacker.name} has no magic affinity")
-    elif attacker.mp == 0:
+    elif attacker.mp >= 20:
         print(f"{attacker.name} has no mp left")
     elif attacker.canAOE == True:
         for attacked in target_list:
-            print(f"{attacker.name} casts chainlightning and hits {attacked.name}")
+            print(f"{attacker.name} casts firewall and hits {attacked.name}")
             attacked.take_damage(max(0,int(20 * attacker.magic_affinity)))
             attacked.statis_effect = "burn"
-            print(f"{attacked.name} was burned")
-            attacker.mp -= 20
+            print(f"{attacked.name} was burned")      
     else:
         print(f"{attacker.name} cant use that spell")
+    attacker.mp -= 20
+    print(f"mp left:{attacker.mp}")
