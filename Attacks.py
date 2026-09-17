@@ -1,6 +1,6 @@
 def attack(target, attacker):
     print(f"{attacker.name} attacks {target.name}")
-    target.take_damage(max(0, attacker.attack() - target.armor))
+    target.take_damage(max(0, attacker.attack() / target.armor))
 
 def aoe_attack(target_list, attacker):
     global attack
@@ -35,12 +35,12 @@ def chain_lightning(target_list, attacker):
     elif attacker.canAOE == True:
         for attacked in target_list:
             print(f"{attacker.name} casts chainlightning and hits {attacked.name}")
-            attacked.take_damage(max(0,int(20 * attacker.magic_affinity)))
+            attacked.take_damage(max(0,int(16 * attacker.magic_affinity)))
             attacked.statis_effect = "stun"
             print(f"{attacked.name} was stuned")
     else:
         print(f"{attacker.name} cant use that spell")
-    attacker.mp -= 20
+    attacker.mp -= 25
     print(f"mp left:{attacker.mp}")
 
 
@@ -65,10 +65,10 @@ def firewall(target_list, attacker):
     elif attacker.canAOE == True:
         for attacked in target_list:
             print(f"{attacker.name} casts firewall and hits {attacked.name}")
-            attacked.take_damage(max(0,int(20 * attacker.magic_affinity)))
+            attacked.take_damage(max(0,int(16 * attacker.magic_affinity)))
             attacked.statis_effect = "burn"
             print(f"{attacked.name} was burned")      
     else:
         print(f"{attacker.name} cant use that spell")
-    attacker.mp -= 20
+    attacker.mp -= 25
     print(f"mp left:{attacker.mp}")

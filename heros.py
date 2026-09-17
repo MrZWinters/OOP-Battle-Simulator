@@ -9,12 +9,12 @@ class Hero:
             self.mp = 0
             self.attack_power = 5
             self.magic_affinity = 0
-            self.armor = 0
+            self.armor = 1
             self.canAOE = True
             self.weapon = "none"
             self.coins = 0
             self.statis_effect = "none"
-            self.items =["apple", "bannana", "orange"]
+            self.items =[]
         
     def attack(self):
         """Return a random amount of damage."""
@@ -27,7 +27,8 @@ class Hero:
         
     def is_dead(self):
         """Return True if dead."""
-        if self.health <= 0:
-            return True
-        else:
-            return False
+        dead = False
+        if self.health == 0:
+            dead = True
+        return dead
+        

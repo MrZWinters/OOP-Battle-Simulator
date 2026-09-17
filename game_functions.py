@@ -2,6 +2,7 @@ import random
 from heros import Hero
 from enemys import Goblin, Skeleton, Boss
 from Attacks import attack, aoe_attack, lightning_orb, chain_lightning, fireball, firewall 
+from enemy_attacks import attack_scratch, attack_punch, attack_slash
 
 def rand_name():
     namelist = ["James", "John", "Robert", "Michael", "William", "David", "Joseph", "Thomas", "Charles", "Christopher", "Daniel", "Matthew", "Anthony", "Mark", "Donald", "Steven", "Paul", "Andrew", "Joshua", "Kenneth", "Kevin", "Brian", "George", "Timothy", "Ronald", "Edward", "Jason", "Jeffrey", "Ryan", "Jacob", "Gary", "Nicholas", "Eric", "Jonathan", "Stephen", "Larry", "Justin", "Scott", "Brandon", "Benjamin", "Samuel", "Gregory", "Alexander", "Patrick", "Frank", "Raymond", "Jack", "Dennis", "Jerry", "Tyler", "Aaron", "Jose", "Henry", "Adam", "Douglas", "Nathan", "Peter", "Zachary", "Kyle", "Walter", "Ethan", "Jeremy", "Harold", "Keith", "Christian", "Roger", "Noah", "Gerald", "Carl", "Terry", "Sean", "Austin", "Arthur", "Lawrence", "Jesse", "Dylan", "Jordan", "Bryan", "Billy", "Joe", "Bruce", "Gabriel", "Albert", "Logan", "Alan", "Juan", "Wayne", "Roy", "Ralph", "Eugene", "Randy", "Vincent", "Russell", "Louis", "Philip", "Bobby", "Johnny", "Bradley", "Mason", "Philip", "Connor", "Cameron", "Eli", "Isaac"]
@@ -74,7 +75,43 @@ def hero_chose_attack(hero: Hero, alive_enemys: list,):
             if spell == "f" or spell == "firewall":
                 firewall(alive_enemys, hero)
 
-            
+def enemy_chose_attack(hero: Hero, enemy: Goblin):
+    rand_attack = random.randint(1,100)
+    if rand_attack >= 1 and rand_attack <= 33:
+        attack_scratch(hero, enemy)
+    elif rand_attack >= 34 and rand_attack <= 66:
+        attack_punch(hero, enemy)
+    elif rand_attack >= 67 and rand_attack <= 99:
+        attack_slash(hero, enemy)
+    elif rand_attack == 100:
+        print(f"{enemy.name} trys to attack and falls on its face")
+
+def shop(hero: Hero):
+    print("----------------------------------------------------------------------------")
+    print("---can only buy one item---")
+    print("shop items: ")
+    print(f"coins: {hero.coins}")
+    print("healing potion(h): 8")
+    print("mana potion(m): 8")
+    print("----------------------------------------------------------------------------")
+    shop_chose = str(input("purchase: "))
+
+    if shop_chose == "h" or shop_chose == "healing potion":
+        if hero.coins >= 8:
+            print(f"{hero.name} bought a healing potion")
+            hero.items.append("healing potion")
+            hero.coins -= 8
+        else:
+            print("your poor")
+
+    if shop_chose == "m" or shop_chose == "mana potion":
+        if hero.coins >= 8:
+            print(f"{hero.name} bought a mana potion")
+            hero.items.append("mana potion")
+            hero.coins -= 8
+        else:
+            print("your poor")
+
 def use_items(hero: Hero):
     items = hero.items
     print("items:")
@@ -88,4 +125,4 @@ def use_items(hero: Hero):
     # elif items[selected_item] == "bannana":
         
     # elif items[selected_item] == "orange":
-        
+
