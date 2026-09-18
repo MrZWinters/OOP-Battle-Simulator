@@ -1,6 +1,4 @@
-from enemys import Goblin, Boss, Skeleton
 from heros import Hero
-from Attacks import attack, aoe_attack, lightning_orb, chain_lightning, fireball, firewall
 from game_functions import stats, enemy_spawner, hero_chose_attack, use_items, enemy_chose_attack, shop, check_levelup, levelup
 import time
 
@@ -15,6 +13,7 @@ def main():
     dead_enemys = []
 
     print("----------------------------------------------------------------------------")
+    time.sleep(0.5)
     hero = Hero(input(f"make character Name: "))
     print("classes: Warrior(w), Mage(m)")
     clas = str(input("select character class:"))
@@ -36,8 +35,10 @@ def main():
     else:
         print("not a class")
     print("----------------------------------------------------------------------------")
+    time.sleep(0.5)
     stats(hero)   
     print("----------------------------------------------------------------------------")
+    time.sleep(0.5)
     print(f"round: {round}")
     enemy_spawner(round, alive_enemys)
     while hero.health != 0:
@@ -47,27 +48,32 @@ def main():
                 target_list = alive_enemys
                 hero_chose_attack(hero,target_list)     
                 print("----------------------------------------------------------------------------")
+                time.sleep(0.5)
             elif turn_chose == "i" or turn_chose == "items":
                 use_items(hero)
             else:
                 print("turn skipped")   
-                print("----------------------------------------------------------------------------")             
+                print("----------------------------------------------------------------------------")
+                time.sleep(0.5)          
+
+            for enemy in alive_enemys:
+                if enemy.is_dead(hero):
+                    alive_enemys.pop(alive_enemys.index(enemy))
+            for enemy in alive_enemys:
+                if enemy.is_dead(hero):
+                    alive_enemys.pop(alive_enemys.index(enemy))
 
             for enemy in alive_enemys:
                 enemy_chose_attack(hero, enemy)
                 print("----------------------------------------------------------------------------")
+                time.sleep(0.5)
 
-            for enemy in alive_enemys:
-                if enemy.is_dead(hero):
-                    alive_enemys.pop(alive_enemys.index(enemy))
-            for enemy in alive_enemys:
-                if enemy.is_dead(hero):
-                    alive_enemys.pop(alive_enemys.index(enemy))
+            
                     
         print("----------------------------------------------------------------------------")
+        time.sleep(0.5)
         print(f"all enemys are dead")
         need_levelup = check_levelup(hero)
-        print(hero.xp)
         if need_levelup == True:
             levelup(hero)
         after_round = str(input("shop(s)  next round(n)"))
@@ -76,10 +82,12 @@ def main():
         elif after_round == "n" or after_round == "next round":
             print(f"moving on to next round")
             print("----------------------------------------------------------------------------")
+            time.sleep(0.5)
             round += 1
             print(f"round: {round}")
             enemy_spawner(round, alive_enemys)
             print("----------------------------------------------------------------------------")
+            time.sleep(0.5)
     print("you died")
 
             

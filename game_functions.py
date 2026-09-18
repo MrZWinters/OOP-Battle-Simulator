@@ -3,6 +3,7 @@ from heros import Hero
 from enemys import Goblin, Skeleton, Boss
 from Attacks import attack, aoe_attack, lightning_orb, chain_lightning, fireball, firewall 
 from enemy_attacks import attack_scratch, attack_punch, attack_slash
+import time
 
 def rand_name():
     namelist = ["James", "John", "Robert", "Michael", "William", "David", "Joseph", "Thomas", "Charles", "Christopher", "Daniel", "Matthew", "Anthony", "Mark", "Donald", "Steven", "Paul", "Andrew", "Joshua", "Kenneth", "Kevin", "Brian", "George", "Timothy", "Ronald", "Edward", "Jason", "Jeffrey", "Ryan", "Jacob", "Gary", "Nicholas", "Eric", "Jonathan", "Stephen", "Larry", "Justin", "Scott", "Brandon", "Benjamin", "Samuel", "Gregory", "Alexander", "Patrick", "Frank", "Raymond", "Jack", "Dennis", "Jerry", "Tyler", "Aaron", "Jose", "Henry", "Adam", "Douglas", "Nathan", "Peter", "Zachary", "Kyle", "Walter", "Ethan", "Jeremy", "Harold", "Keith", "Christian", "Roger", "Noah", "Gerald", "Carl", "Terry", "Sean", "Austin", "Arthur", "Lawrence", "Jesse", "Dylan", "Jordan", "Bryan", "Billy", "Joe", "Bruce", "Gabriel", "Albert", "Logan", "Alan", "Juan", "Wayne", "Roy", "Ralph", "Eugene", "Randy", "Vincent", "Russell", "Louis", "Philip", "Bobby", "Johnny", "Bradley", "Mason", "Philip", "Connor", "Cameron", "Eli", "Isaac"]
@@ -89,6 +90,7 @@ def enemy_chose_attack(hero: Hero, enemy: Goblin):
 
 def shop(hero: Hero):
     print("----------------------------------------------------------------------------")
+    time.sleep(0.5)
     print("---can only buy one item---")
     print("shop items: ")
     print(f"coins: {hero.coins}")
@@ -96,6 +98,7 @@ def shop(hero: Hero):
     print("mana potion(m): 8")
     print("upgrade armor(a): 30")
     print("----------------------------------------------------------------------------")
+    time.sleep(0.5)
     shop_chose = str(input("purchase: "))
 
     if shop_chose == "h" or shop_chose == "healing potion":
@@ -126,16 +129,29 @@ def use_items(hero: Hero):
     items = hero.items
     print("items:")
     print("----------------------------------------------------------------------------")
-    for item in items:
-        print(f"{items.index(item)+1}: ({item})")
-    print("----------------------------------------------------------------------------")
-    selected_item = int(input("selects item number: "))-1
-    if items[selected_item] == "healing potion":
-        hero.health = max(hero.max_health, (hero.health + 50))
-        print(f"{hero.name} healed to {hero.health}")
-    elif items[selected_item] == "mana potion":
-        hero.mp = max(hero.max_mp, (hero.mp + 80))
-        print(f"{hero.name} restored mana to {hero.mp}")
+    time.sleep(0.5)
+    if items == []:
+        print("you have no items")
+        print("----------------------------------------------------------------------------")
+        time.sleep(0.5)          
+    else:
+        for item in items:
+            print(f"{items.index(item)+1}: ({item})")
+        print("----------------------------------------------------------------------------")
+        time.sleep(0.5)
+        selected_item = int(input("selects item number: "))-1
+        if items[selected_item] == "healing potion":
+            hero.health = max(hero.max_health, (hero.health + 50))
+            print(f"{hero.name} healed to {hero.health}")
+            hero.items.pop(selected_item - 1)
+            print("----------------------------------------------------------------------------")
+            time.sleep(0.5)          
+        elif items[selected_item] == "mana potion":
+            hero.mp = max(hero.max_mp, (hero.mp + 80))
+            print(f"{hero.name} restored mana to {hero.mp}")
+            print("----------------------------------------------------------------------------")
+            time.sleep(0.5)          
+
 
 def check_levelup(hero: Hero):
     need_levelup = False
@@ -145,12 +161,14 @@ def check_levelup(hero: Hero):
 
 def levelup(hero: Hero):
     print("----------------------------------------------------------------------------")
+    time.sleep(0.5)
     print("you have a level up")
     print(f"max health(h): {hero.max_health}")
     print(f"max mana(m): {hero.max_mp}")
     print(f"attack power(p): {hero.attack_power}")
     print(f"magic affinity(a): {hero.magic_affinity}")
     print("----------------------------------------------------------------------------")
+    time.sleep(0.5)
     levelchose = str(input("select stat to level up: "))
     if levelchose == "h" or levelchose == "max health":
         hero.max_health += 50
@@ -169,3 +187,4 @@ def levelup(hero: Hero):
         hero.xp -= int((66 * (1.5 * hero.level)))
         print(f"magic affinity is now: {hero.magic_affinity}")
     print("----------------------------------------------------------------------------")
+    time.sleep(0.5)
