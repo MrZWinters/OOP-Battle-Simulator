@@ -79,14 +79,17 @@ def hero_chose_attack(hero: Hero, alive_enemys: list,):
 
 def enemy_chose_attack(hero: Hero, enemy: Goblin):
     rand_attack = random.randint(1,100)
-    if rand_attack >= 1 and rand_attack <= 33:
-        attack_scratch(hero, enemy)
-    elif rand_attack >= 34 and rand_attack <= 66:
-        attack_punch(hero, enemy)
-    elif rand_attack >= 67 and rand_attack <= 99:
-        attack_slash(hero, enemy)
-    elif rand_attack == 100:
-        print(f"{enemy.name} trys to attack and falls on its face")
+    if enemy.statis_effect == "burn":
+        enemy.take_damage(5)
+    if enemy.statis_effect != "stun":
+        if rand_attack >= 1 and rand_attack <= 33:
+            attack_scratch(hero, enemy)
+        elif rand_attack >= 34 and rand_attack <= 66:
+            attack_punch(hero, enemy)
+        elif rand_attack >= 67 and rand_attack <= 99:
+            attack_slash(hero, enemy)
+        elif rand_attack == 100:
+            print(f"{enemy.name} trys to attack and falls on its face")
 
 def shop(hero: Hero):
     print("----------------------------------------------------------------------------")
@@ -151,7 +154,6 @@ def use_items(hero: Hero):
             print(f"{hero.name} restored mana to {hero.mp}")
             print("----------------------------------------------------------------------------")
             time.sleep(0.5)          
-
 
 def check_levelup(hero: Hero):
     need_levelup = False
