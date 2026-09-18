@@ -10,6 +10,7 @@ def rand_name():
 
 def stats(hero: Hero):
     '''Prints a Stat Sheet'''
+    print(f"Level {hero.level}")
     print(f"Health:{hero.health}")
     print(f"MP:{hero.mp}")
     print(f"Attack Power:{hero.attack_power}")
@@ -93,6 +94,7 @@ def shop(hero: Hero):
     print(f"coins: {hero.coins}")
     print("healing potion(h): 8")
     print("mana potion(m): 8")
+    print("upgrade armor(a): 30")
     print("----------------------------------------------------------------------------")
     shop_chose = str(input("purchase: "))
 
@@ -112,6 +114,14 @@ def shop(hero: Hero):
         else:
             print("your poor")
 
+    if shop_chose == "a" or shop_chose == "upgrade armor":
+            if hero.coins >= 30:
+                print(f"{hero.name} bought an armor upgrade")
+                hero.armor += 0.1
+                hero.coins -= 30
+            else:
+                print("your poor")
+
 def use_items(hero: Hero):
     items = hero.items
     print("items:")
@@ -120,9 +130,42 @@ def use_items(hero: Hero):
         print(f"{items.index(item)+1}: ({item})")
     print("----------------------------------------------------------------------------")
     selected_item = int(input("selects item number: "))-1
-    # if items[selected_item] == "apple":
-        
-    # elif items[selected_item] == "bannana":
-        
-    # elif items[selected_item] == "orange":
+    if items[selected_item] == "healing potion":
+        hero.health = max(hero.max_health, (hero.health + 50))
+        print(f"{hero.name} healed to {hero.health}")
+    elif items[selected_item] == "mana potion":
+        hero.mp = max(hero.max_mp, (hero.mp + 80))
+        print(f"{hero.name} restored mana to {hero.mp}")
 
+def check_levelup(hero: Hero):
+    need_levelup = False
+    if int(hero.xp) >= int(66 * (1.5 * hero.level)):
+        need_levelup = True
+    return need_levelup
+
+def levelup(hero: Hero):
+    print("----------------------------------------------------------------------------")
+    print("you have a level up")
+    print(f"max health(h): {hero.max_health}")
+    print(f"max mana(m): {hero.max_mp}")
+    print(f"attack power(p): {hero.attack_power}")
+    print(f"magic affinity(a): {hero.magic_affinity}")
+    print("----------------------------------------------------------------------------")
+    levelchose = str(input("select stat to level up: "))
+    if levelchose == "h" or levelchose == "max health":
+        hero.max_health += 50
+        hero.xp -= int((66 * (1.5 * hero.level)))
+        print(f"max health is now: {hero.max_health}")
+    elif levelchose == "m" or levelchose == "max mana":
+        hero.max_mp += 50
+        hero.xp -= int((66 * (1.5 * hero.level)))
+        print(f"max mana is now: {hero.max_mp}")
+    elif levelchose == "p" or levelchose == "attack power":
+        hero.attack_power += 5
+        hero.xp -= int((66 * (1.5 * hero.level)))
+        print(f"attack power is now: {hero.attack_power}")
+    elif levelchose == "a" or levelchose == "magic affinity":
+        hero.magic_affinity += 0.1
+        hero.xp -= int((66 * (1.5 * hero.level)))
+        print(f"magic affinity is now: {hero.magic_affinity}")
+    print("----------------------------------------------------------------------------")

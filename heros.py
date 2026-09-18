@@ -3,6 +3,7 @@ import random
 class Hero:
     def __init__(self, name):
             self.name = name
+            self.level = 1
             self.max_health = 100
             self.health = 100
             self.max_mp = 0
@@ -15,10 +16,11 @@ class Hero:
             self.coins = 0
             self.statis_effect = "none"
             self.items =[]
+            self.xp = 0
         
     def attack(self):
         """Return a random amount of damage."""
-        return random.randint(20, self.attack_power)
+        return max(1, random.randint((self.attack_power-5), self.attack_power))
         
     def take_damage(self, damage):
         """Reduce health without allowing it to fall below zero."""

@@ -17,7 +17,7 @@ class Goblin:
 
     def attack(self):
         """Return a random amount of damage."""
-        return random.randint(15, self.attack_power)
+        return max(1, random.randint((self.attack_power-10), self.attack_power))
 
     def take_damage(self, damage):
         """Reduce health without allowing it to fall below zero."""
@@ -28,8 +28,9 @@ class Goblin:
         """Return True if dead."""
         dead = False
         if self.health == 0:
-            print(f"{hero.name} got 10 coins")
+            print(f"{hero.name} got 10 coins and 50 xp")
             hero.coins += 10
+            hero.xp += 50
             dead = True
         return dead
 
@@ -48,7 +49,7 @@ class Boss:
 
     def attack(self):
         """Return a random amount of damage."""
-        return random.randint(30, self.attack_power)
+        return max(1, random.randint((self.attack_power-5), self.attack_power))
 
     def take_damage(self, damage):
         """Reduce health without allowing it to fall below zero."""
@@ -59,8 +60,9 @@ class Boss:
         """Return True if dead."""
         dead = False
         if self.health == 0:
-            print(f"{hero.name} got 30 coins")
-            hero.coins += 30
+            print(f"{hero.name} got 20 coins and 100 xp")
+            hero.coins += 20
+            hero.xp += 100
             dead = True
         return dead
 
@@ -79,7 +81,7 @@ class Skeleton:
 
     def attack(self):
         """Return a random amount of damage."""
-        return random.randint(20, self.attack_power)
+        return max(1, random.randint((self.attack_power-5), self.attack_power))
 
     def take_damage(self, damage):
         """Reduce health without allowing it to fall below zero."""
@@ -90,7 +92,8 @@ class Skeleton:
         """Return True if dead."""
         dead = False
         if self.health == 0:
-            print(f"{hero.name} got 15 coins")
+            print(f"{hero.name} got 15 coins and 70 xp")
             hero.coins += 15
+            hero.xp += 70
             dead = True
         return dead

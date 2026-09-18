@@ -1,7 +1,7 @@
 from enemys import Goblin, Boss, Skeleton
 from heros import Hero
 from Attacks import attack, aoe_attack, lightning_orb, chain_lightning, fireball, firewall
-from game_functions import stats, enemy_spawner, hero_chose_attack, use_items, enemy_chose_attack, shop
+from game_functions import stats, enemy_spawner, hero_chose_attack, use_items, enemy_chose_attack, shop, check_levelup, levelup
 import time
 
 ARENA_NAME = "Super cool ARENA"
@@ -19,7 +19,7 @@ def main():
     print("classes: Warrior(w), Mage(m)")
     clas = str(input("select character class:"))
     if clas.lower() == "w":
-        hero.max_health
+        hero.max_health = 150
         hero.health = 150
         hero.max_mp = 0
         hero.attack_power = 150
@@ -40,7 +40,7 @@ def main():
     print("----------------------------------------------------------------------------")
     print(f"round: {round}")
     enemy_spawner(round, alive_enemys)
-    while True:
+    while hero.health != 0:
         while alive_enemys != []:
             turn_chose = str(input("attack(a)  items(i)  skip(anything else): "))
             if turn_chose == "a" or turn_chose == "attack":
@@ -66,28 +66,26 @@ def main():
                     
         print("----------------------------------------------------------------------------")
         print(f"all enemys are dead")
+        need_levelup = check_levelup(hero)
+        print(hero.xp)
+        if need_levelup == True:
+            levelup(hero)
         after_round = str(input("shop(s)  next round(n)"))
         if after_round == "s" or after_round == "shop":
             shop(hero)
         elif after_round == "n" or after_round == "next round":
-            print("----------------------------------------------------------------------------")
             print(f"moving on to next round")
+            print("----------------------------------------------------------------------------")
             round += 1
             print(f"round: {round}")
             enemy_spawner(round, alive_enemys)
             print("----------------------------------------------------------------------------")
-
+    print("you died")
 
             
 
             
         
-
-
-
-
-    
-
 
 
 if __name__ == "__main__":
