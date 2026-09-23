@@ -6,6 +6,7 @@ from enemy_attacks import attack_scratch, attack_punch, attack_slash
 import time
 
 def rand_name():
+    """picks a random name of of 100 set names"""
     namelist = ["James", "John", "Robert", "Michael", "William", "David", "Joseph", "Thomas", "Charles", "Christopher", "Daniel", "Matthew", "Anthony", "Mark", "Donald", "Steven", "Paul", "Andrew", "Joshua", "Kenneth", "Kevin", "Brian", "George", "Timothy", "Ronald", "Edward", "Jason", "Jeffrey", "Ryan", "Jacob", "Gary", "Nicholas", "Eric", "Jonathan", "Stephen", "Larry", "Justin", "Scott", "Brandon", "Benjamin", "Samuel", "Gregory", "Alexander", "Patrick", "Frank", "Raymond", "Jack", "Dennis", "Jerry", "Tyler", "Aaron", "Jose", "Henry", "Adam", "Douglas", "Nathan", "Peter", "Zachary", "Kyle", "Walter", "Ethan", "Jeremy", "Harold", "Keith", "Christian", "Roger", "Noah", "Gerald", "Carl", "Terry", "Sean", "Austin", "Arthur", "Lawrence", "Jesse", "Dylan", "Jordan", "Bryan", "Billy", "Joe", "Bruce", "Gabriel", "Albert", "Logan", "Alan", "Juan", "Wayne", "Roy", "Ralph", "Eugene", "Randy", "Vincent", "Russell", "Louis", "Philip", "Bobby", "Johnny", "Bradley", "Mason", "Philip", "Connor", "Cameron", "Eli", "Isaac"]
     return(namelist[random.randint(1,100)])
 
@@ -20,6 +21,7 @@ def stats(hero: Hero):
     print(f"Coins:{hero.coins}")
 
 def enemy_spawner(round: int, aliveEnemys: list):
+    """creates enemyes in a given list based on the round your on"""
     if round % 10 == 0:
         #spawns a boss
         aliveEnemys.append(Boss(rand_name()))
@@ -35,8 +37,12 @@ def enemy_spawner(round: int, aliveEnemys: list):
         print(f"a goblin spawns")
 
 def hero_chose_attack(hero: Hero, alive_enemys: list,):
+    """lets the player pick an attack"""
+    #checks if the hero has a sword
     if hero.weapon == "sword":
+        #lets the player chose between a slash or AOE attack
         attack_chose = str(input("slash(s)  AOE slash(a)"))
+        #if a slash displayes the enemys and lets them pick witch one to attack if more then one enemy
         if attack_chose == "s" or attack_chose == "slash":
             if len(alive_enemys) > 1:
                 print("targest:")
@@ -46,8 +52,11 @@ def hero_chose_attack(hero: Hero, alive_enemys: list,):
                 attack(alive_enemys[target-1], hero)
             else:
                 attack(alive_enemys[0], hero)
+        #does an AOE attack on all enemeys
         elif attack_chose == "a" or attack_chose == "AOE slash":
             aoe_attack(alive_enemys, hero)
+    #checks if the hero has a staff
+    #make more comments
     elif hero.weapon == "staff":
         attack_chose = str(input("spell(s)  AOE spell(a)"))
         if attack_chose == "s" or attack_chose == "spell":
@@ -78,6 +87,7 @@ def hero_chose_attack(hero: Hero, alive_enemys: list,):
                 firewall(alive_enemys, hero)
 
 def enemy_chose_attack(hero: Hero, enemy: Goblin):
+    """pickes a random attack"""
     rand_attack = random.randint(1,100)
     if enemy.statis_effect == "burn":
         enemy.take_damage(5)
@@ -144,13 +154,13 @@ def use_items(hero: Hero):
         time.sleep(0.5)
         selected_item = int(input("selects item number: "))-1
         if items[selected_item] == "healing potion":
-            hero.health = max(hero.max_health, (hero.health + 50))
+            hero.health = min(hero.max_health, (hero.health + 50))
             print(f"{hero.name} healed to {hero.health}")
             hero.items.pop(selected_item - 1)
             print("----------------------------------------------------------------------------")
             time.sleep(0.5)          
         elif items[selected_item] == "mana potion":
-            hero.mp = max(hero.max_mp, (hero.mp + 80))
+            hero.mp = min(hero.max_mp, (hero.mp + 80))
             print(f"{hero.name} restored mana to {hero.mp}")
             print("----------------------------------------------------------------------------")
             time.sleep(0.5)          
