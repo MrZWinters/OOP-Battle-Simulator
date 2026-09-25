@@ -50,7 +50,6 @@ class Boss(enemy):
         def attack(self):
             return super().attack() + 5
 
-
 class Skeleton(enemy):
     """A completed character class students can examine as an OOP example."""
 
