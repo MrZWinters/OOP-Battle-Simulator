@@ -23,7 +23,7 @@ def main():
         hero.max_health = 150
         hero.health = 150
         hero.max_mp = 0
-        hero.attack_power = 20
+        hero.attack_power = 520
         hero.armor = 1.7
         hero.weapon = "sword"
     elif clas.lower() == "m":

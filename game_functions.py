@@ -149,7 +149,8 @@ def use_items(hero: Hero):
         time.sleep(0.5)          
     else:
         for item in items:
-            print(f"{items.index(item)+1}: ({item})")
+            item_num += 1
+            print(f"{item_num}: ({item})")
         print("----------------------------------------------------------------------------")
         time.sleep(0.5)
         selected_item = int(input("selects item number: "))-1
