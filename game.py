@@ -47,7 +47,7 @@ def main():
     enemy_spawner(round, alive_enemys)
     #battle loop
     while hero.health != 0:
-        while alive_enemys != []:
+        while alive_enemys != [] and hero.health != 0:
             turn_chose = str(input("attack(a)  items(i)  skip(anything else): "))
             #lets the player attack
             if turn_chose == "a" or turn_chose == "attack":
@@ -75,6 +75,7 @@ def main():
             #has each enemy attack the player out of a select amount of attacks
             for enemy in alive_enemys:
                 enemy_chose_attack(hero, enemy)
+                hero.is_dead()
                 print("----------------------------------------------------------------------------")
                 time.sleep(0.5)
 
