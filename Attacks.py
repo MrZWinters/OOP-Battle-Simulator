@@ -1,3 +1,6 @@
+import random
+
+
 def attack(target, attacker):
     print(f"{attacker.name} attacks {target.name}")
     target.take_damage(max(0, attacker.attack() / target.armor))
@@ -22,8 +25,10 @@ def lightning_orb(target, attacker):
     else:
         print(f"{attacker.name} casts ballLightning at {target.name}")
         target.take_damage(max(0,int(20 * attacker.magic_affinity)))
-        target.statis_effect = "stun"
-        print(f"{target.name} was stuned")
+        #1/6 chance to apply stun
+        if random.randint(1,6) == 1:
+            attacker.statis_effect = "stun"
+            print(f"{attacker.name} was stunned")
         attacker.mp -= 20
     print(f"mp left:{attacker.mp}")
 
@@ -36,8 +41,10 @@ def chain_lightning(target_list, attacker):
         for attacked in target_list:
             print(f"{attacker.name} casts chainlightning and hits {attacked.name}")
             attacked.take_damage(max(0,int(16 * attacker.magic_affinity)))
-            attacked.statis_effect = "stun"
-            print(f"{attacked.name} was stuned")
+            #1/6 chance to apply stun
+            if random.randint(1,6) == 1:
+                attacked.statis_effect = "stun"
+                print(f"{attacked.name} was stunned")
             attacker.mp -= 25
     else:
         print(f"{attacker.name} cant use that spell")
@@ -45,6 +52,7 @@ def chain_lightning(target_list, attacker):
 
 
 def fireball(target, attacker):
+    """casts fire ball at a selected opponent"""
     if attacker.magic_affinity == 0:
         print(f"{attacker.name} has no magic affinity")
     elif attacker.mp <= 20:
@@ -52,12 +60,15 @@ def fireball(target, attacker):
     else:
         print(f"{attacker.name} casts fireball at {target.name}")
         target.take_damage(max(0,int(20 * attacker.magic_affinity)))
-        target.statis_effect = "burn"
-        print(f"{target.name} was burned")
+        #1/6 chance to apply burn
+        if random.randint(1,6) == 1:
+            attacker.statis_effect = "burn"
+            print(f"{attacker.name} was burned")
         attacker.mp -= 20
     print(f"mp left:{attacker.mp}")
 
 def firewall(target_list, attacker):
+    """attack all enemys is list with firewall"""
     if attacker.magic_affinity == 0:
         print(f"{attacker.name} has no magic affinity")
     elif attacker.mp <= 25:
@@ -66,9 +77,22 @@ def firewall(target_list, attacker):
         for attacked in target_list:
             print(f"{attacker.name} casts firewall and hits {attacked.name}")
             attacked.take_damage(max(0,int(16 * attacker.magic_affinity)))
-            attacked.statis_effect = "burn"
-            print(f"{attacked.name} was burned")      
+            #1/6 chance to apply burn
+            if random.randint(1,6) == 1:
+                attacked.statis_effect = "burn"
+                print(f"{attacked.name} was burned")      
             attacker.mp -= 25
     else:
         print(f"{attacker.name} cant use that spell")
     print(f"mp left:{attacker.mp}")
+
+def burn(target):
+    target.take_damage(5)
+
+
+
+
+
+
+
+

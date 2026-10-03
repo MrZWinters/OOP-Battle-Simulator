@@ -23,16 +23,16 @@ def main():
         hero.max_health = 150
         hero.health = 150
         hero.max_mp = 0
-        hero.attack_power = 520
+        hero.attack_power = 35
         hero.armor = 1.7
         hero.weapon = "sword"
     elif clas.lower() == "m":
-        hero.max_health = 120
-        hero.health = 120
+        hero.max_health = 130
+        hero.health = 130
         hero.max_mp = 100
         hero.mp = 100
         hero.magic_affinity = 1.5
-        hero.armor = 1.3
+        hero.armor = 1.5
         hero.weapon = "staff"
     else:
         print("not a class")
@@ -79,7 +79,6 @@ def main():
                 print("----------------------------------------------------------------------------")
                 time.sleep(0.5)
 
-            
         #end of round loop          
         print("----------------------------------------------------------------------------")
         time.sleep(0.5)
@@ -108,10 +107,5 @@ def main():
     print("you died")
 
             
-
-            
-        
-
-
 if __name__ == "__main__":
     main()

@@ -90,7 +90,10 @@ def enemy_chose_attack(hero: Hero, enemy: Goblin):
     """pickes a random attack"""
     rand_attack = random.randint(1,100)
     if enemy.statis_effect == "burn":
+        print(f"{enemy.name} was burned and took 5 dammage")
         enemy.take_damage(5)
+        if random.randint(1,6) == 1:
+            enemy.statis_effect == "none"
     if enemy.statis_effect != "stun":
         if rand_attack >= 1 and rand_attack <= 33:
             attack_scratch(hero, enemy)
@@ -100,6 +103,10 @@ def enemy_chose_attack(hero: Hero, enemy: Goblin):
             attack_slash(hero, enemy)
         elif rand_attack == 100:
             print(f"{enemy.name} trys to attack and falls on its face")
+    else:
+        print(f"{enemy.name} was stuned and couldn't attact")
+        if random.randint(1,6) == 1:
+                    enemy.statis_effect == "none"
 
 def shop(hero: Hero):
     print("----------------------------------------------------------------------------")
